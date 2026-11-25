@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dinas Perpustakaan dan Kearsipan Kota Pekanbaru</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- Font Inter & Custom Stylesheet -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            blue: '#0056b3',
+                            darkblue: '#003366',
+                            lightblue: '#e6f0fa',
+                            orange: '#ff6f00',
+                            orangehover: '#e06000',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-slate-50 text-slate-800 flex flex-col min-h-screen">
+
+    <!-- Header Navigation -->
+    <header class="bg-brand-darkblue text-white shadow-md sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <!-- Logo & Brand -->
+                <div class="flex items-center space-x-3 cursor-pointer" onclick="navigateTo('home')">
+                    <div class="bg-white p-2 rounded-lg shadow">
+                        <i data-lucide="book-open-check" class="w-8 h-8 text-brand-blue"></i>
+                    </div>
+                    <div>
+                        <h1 class="font-bold text-lg leading-tight tracking-wide">DISPUSIP PEKANBARU</h1>
+                        <p class="text-xs text-brand-orange font-medium">Dinas Perpustakaan & Kearsipan Kota Pekanbaru</p>
+                    </div>
+                </div>
+
+                <!-- Desktop Nav Navigation Links -->
+                <nav class="hidden md:flex space-x-1">
+                    <button onclick="navigateTo('home')" id="nav-home" class="nav-btn px-4 py-2 rounded-md font-medium text-sm transition flex items-center gap-1.5 hover:bg-white/10">
+                        <i data-lucide="home" class="w-4 h-4"></i> Beranda
+                    </button>
+                    <button onclick="navigateTo('katalog')" id="nav-katalog" class="nav-btn px-4 py-2 rounded-md font-medium text-sm transition flex items-center gap-1.5 hover:bg-white/10">
+                        <i data-lucide="book" class="w-4 h-4"></i> Katalog Buku
+                    </button>
+                    <button onclick="navigateTo('layanan')" id="nav-layanan" class="nav-btn px-4 py-2 rounded-md font-medium text-sm transition flex items-center gap-1.5 hover:bg-white/10">
+                        <i data-lucide="grid" class="w-4 h-4"></i> Layanan
+                    </button>
+                    <button onclick="navigateTo('kearsipan')" id="nav-kearsipan" class="nav-btn px-4 py-2 rounded-md font-medium text-sm transition flex items-center gap-1.5 hover:bg-white/10">
+                        <i data-lucide="archive" class="w-4 h-4"></i> Kearsipan
+                    </button>
+                    <button onclick="navigateTo('kontak')" id="nav-kontak" class="nav-btn px-4 py-2 rounded-md font-medium text-sm transition flex items-center gap-1.5 hover:bg-white/10">
+                        <i data-lucide="phone" class="w-4 h-4"></i> Kontak
+                    </button>
+                </nav>
+
+                <!-- Action Button Form -->
+                <div class="hidden md:flex items-center space-x-3">
+                    <button onclick="navigateTo('form')" class="bg-brand-orange hover:bg-brand-orangehover text-white font-semibold px-4 py-2 rounded-lg shadow-md transition flex items-center gap-2 transform active:scale-95">
+                        <i data-lucide="user-check" class="w-4 h-4"></i>
+                        <span>Formulir Nur Hafizah</span>
+                    </button>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-btn" onclick="toggleMobileMenu()" class="p-2 rounded-md text-slate-200 hover:text-white hover:bg-white/10 focus:outline-none">
+                        <i data-lucide="menu" class="w-6 h-6"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Navigation Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-brand-darkblue border-t border-blue-900 px-4 pt-2 pb-4 space-y-2">
+            <button onclick="navigateTo('home')" class="w-full text-left px-3 py-2 rounded-md font-medium text-sm text-slate-200 hover:bg-white/10 flex items-center gap-2"><i data-lucide="home" class="w-4 h-4"></i> Beranda</button>
+            <button onclick="navigateTo('katalog')" class="w-full text-left px-3 py-2 rounded-md font-medium text-sm text-slate-200 hover:bg-white/10 flex items-center gap-2"><i data-lucide="book" class="w-4 h-4"></i> Katalog Buku</button>
+            <button onclick="navigateTo('layanan')" class="w-full text-left px-3 py-2 rounded-md font-medium text-sm text-slate-200 hover:bg-white/10 flex items-center gap-2"><i data-lucide="grid" class="w-4 h-4"></i> Layanan</button>
+            <button onclick="navigateTo('kearsipan')" class="w-full text-left px-3 py-2 rounded-md font-medium text-sm text-slate-200 hover:bg-white/10 flex items-center gap-2"><i data-lucide="archive" class="w-4 h-4"></i> Kearsipan</button>
+            <button onclick="navigateTo('kontak')" class="w-full text-left px-3 py-2 rounded-md font-medium text-sm text-slate-200 hover:bg-white/10 flex items-center gap-2"><i data-lucide="phone" class="w-4 h-4"></i> Kontak</button>
+            <button onclick="navigateTo('form')" class="w-full text-left px-3 py-2.5 rounded-md font-semibold text-sm bg-brand-orange text-white flex items-center gap-2"><i data-lucide="user-check" class="w-4 h-4"></i> Formulir Layanan (Nur Hafizah)</button>
+        </div>
+    </header>
+
+    <!-- Main Content Container -->
+    <main class="flex-grow">
+        
+        <!-- SECTION: BERANDA -->
+        <section id="page-home" class="page-section">
+            <div class="relative bg-gradient-to-r from-brand-darkblue via-brand-blue to-blue-800 text-white py-16 px-4">
+                <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-8">
+                    <div class="md:w-1/2 space-y-4">
+                        <span class="bg-brand-orange/20 text-brand-orange border border-brand-orange/30 px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider">Layanan Resmi Masyarakat Pekanbaru</span>
+                        <h2 class="text-3xl md:text-5xl font-bold leading-tight">Mewujudkan Pekanbaru Cerdas & Gemar Membaca</h2>
+                        <p class="text-slate-200 text-sm md:text-base">Akses perpustakaan digital, peminjaman buku, dan tata kelola kearsipan terpadu untuk masyarakat Kota Pekanbaru.</p>
+                        <div class="pt-2 flex flex-wrap gap-3">
+                            <button onclick="navigateTo('katalog')" class="bg-brand-orange hover:bg-brand-orangehover text-white px-6 py-3 rounded-lg font-medium transition shadow-lg flex items-center gap-2">
+                                <i data-lucide="search" class="w-4 h-4"></i> Cari Buku
+                            </button>
+                            <button onclick="navigateTo('form')" class="bg-white text-brand-darkblue hover:bg-slate-100 px-6 py-3 rounded-lg font-medium transition shadow-lg flex items-center gap-2">
+                                <i data-lucide="file-text" class="w-4 h-4"></i> Form Nur Hafizah
+                            </button>
+                        </div>
+                    </div>
+                    <div class="md:w-1/2 flex justify-center">
+                        <div class="bg-white/10 backdrop-blur-md p-6 rounded-2xl border border-white/20 shadow-2xl w-full max-w-md">
+                            <div class="flex items-center gap-3 mb-4 border-b border-white/20 pb-3">
+                                <i data-lucide="info" class="w-6 h-6 text-brand-orange"></i>
+                                <h3 class="font-bold text-lg">Informasi Pelayanan</h3>
+                            </div>
+                            <ul class="space-y-3 text-sm">
+                                <li class="flex items-start gap-2">
+                                    <i data-lucide="clock" class="w-4 h-4 text-brand-orange mt-0.5"></i>
+                                    <span><strong>Jam Operasional:</strong> 
+									<li>Senin - Jumat (08.00 - 16.00 WIB)
+									<li>Jumat: 08.00 - 16.30 WIB</li>
+									<li>Sabtu - Minggu: 09.00 - 15.00 WIB</li></span>
+                                </li>
+                                <li class="flex items-start gap-2">
+                                    <i data-lucide="map-pin" class="w-4 h-4 text-brand-orange mt-0.5"></i>
+                                    <span>Jl. Dr. Sutomo No. 1, Pekanbaru, Riau</span>
+                                </li>
+                                <li class="flex items-start gap-2">
+                                    <i data-lucide="user" class="w-4 h-4 text-brand-orange mt-0.5"></i>
+                                    <span><strong>Penanggung Jawab Form:</strong> Nur Hafizah</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Fitur Utama -->
+            <div class="max-w-7xl mx-auto px-4 py-12">
+                <div class="text-center mb-10">
+                    <h3 class="text-2xl font-bold text-slate-800">Layanan Unggulan Dispusip</h3>
+                    <p class="text-slate-500 text-sm">Kemudahan akses informasi pustaka dan arsip digital Pekanbaru</p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm hover:shadow-md transition">
+                        <div class="w-12 h-12 bg-blue-50 rounded-lg flex items-center justify-center text-brand-blue mb-4">
+                            <i data-lucide="book-open" class="w-6 h-6"></i>
+                        </div>
+                        <h4 class="font-bold text-slate-800 mb-2">Peminjaman Buku</h4>
+                        <p class="text-slate-600 text-sm mb-4">Akses koleksi ribuan buku fisik dan cetak dengan pendaftaran anggota yang mudah.</p>
+                        <button onclick="navigateTo('katalog')" class="text-brand-blue font-semibold text-sm hover:underline flex items-center gap-1">Lihat Katalog <i data-lucide="arrow-right" class="w-4 h-4"></i></button>
+                    </div>
+                    <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm hover:shadow-md transition">
+                        <div class="w-12 h-12 bg-orange-50 rounded-lg flex items-center justify-center text-brand-orange mb-4">
+                            <i data-lucide="file-check" class="w-6 h-6"></i>
+                        </div>
+                        <h4 class="font-bold text-slate-800 mb-2">Layanan Kearsipan</h4>
+                        <p class="text-slate-600 text-sm mb-4">Pengelolaan, penyelamatan, dan konsultasi arsip daerah Kota Pekanbaru.</p>
+                        <button onclick="navigateTo('kearsipan')" class="text-brand-orange font-semibold text-sm hover:underline flex items-center gap-1">Info Kearsipan <i data-lucide="arrow-right" class="w-4 h-4"></i></button>
+                    </div>
+                    <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm hover:shadow-md transition">
+                        <div class="w-12 h-12 bg-blue-50 rounded-lg flex items-center justify-center text-brand-blue mb-4">
+                            <i data-lucide="edit-3" class="w-6 h-6"></i>
+                        </div>
+                        <h4 class="font-bold text-slate-800 mb-2">Formulir Terpadu</h4>
+                        <p class="text-slate-600 text-sm mb-4">Pengajuan permohonan layanan publik online oleh Petugas Nur Hafizah.</p>
+                        <button onclick="navigateTo('form')" class="text-brand-blue font-semibold text-sm hover:underline flex items-center gap-1">Buka Form <i data-lucide="arrow-right" class="w-4 h-4"></i></button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION: KATALOG BUKU -->
+        <section id="page-katalog" class="page-section hidden max-w-7xl mx-auto px-4 py-8">
+            <div class="mb-6 flex flex-col md:flex-row md:items-center justify-between gap-4">
+                <div>
+                    <h2 class="text-2xl font-bold text-brand-darkblue">Katalog Perpustakaan Pekanbaru</h2>
+                    <p class="text-slate-500 text-sm">Cari dan pilih koleksi buku untuk dipinjam melalui Form Nur Hafizah</p>
+                </div>
+                <div class="relative w-full md:w-72">
+                    <input type="text" id="search-buku" onkeyup="filterBuku()" placeholder="Cari judul buku..." class="w-full pl-10 pr-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-blue text-sm">
+                    <i data-lucide="search" class="w-4 h-4 text-slate-400 absolute left-3 top-3"></i>
+                </div>
+            </div>
+
+            <!-- Daftar Buku -->
+            <div id="katalog-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Buku 1 -->
+                <div class="buku-card bg-white rounded-xl overflow-hidden border border-slate-200 shadow-sm flex flex-col">
+                    <div class="h-40 bg-brand-lightblue flex items-center justify-center p-4">
+                        <i data-lucide="book-marked" class="w-16 h-16 text-brand-blue"></i>
+                    </div>
+                    <div class="p-4 flex-grow flex flex-col justify-between">
+                        <div>
+                            <span class="text-xs bg-blue-100 text-brand-blue px-2 py-0.5 rounded font-semibold">Sejarah & Budaya</span>
+                            <h3 class="buku-title font-bold text-slate-800 mt-2">Sejarah Kota Pekanbaru & Kebudayaan Melayu</h3>
+                            <p class="text-xs text-slate-500 mt-1">Penulis: Drs. H. Ahmad Melayu</p>
+                        </div>
+                        <button onclick="pilihBuku('Sejarah Kota Pekanbaru & Kebudayaan Melayu')" class="mt-4 w-full bg-brand-orange hover:bg-brand-orangehover text-white text-xs font-semibold py-2 rounded-lg transition flex items-center justify-center gap-1">
+                            <i data-lucide="plus" class="w-3.5 h-3.5"></i> Pinjam via Form Nur Hafizah
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Buku 2 -->
+                <div class="buku-card bg-white rounded-xl overflow-hidden border border-slate-200 shadow-sm flex flex-col">
+                    <div class="h-40 bg-orange-50 flex items-center justify-center p-4">
+                        <i data-lucide="book-open" class="w-16 h-16 text-brand-orange"></i>
+                    </div>
+                    <div class="p-4 flex-grow flex flex-col justify-between">
+                        <div>
+                            <span class="text-xs bg-orange-100 text-brand-orange px-2 py-0.5 rounded font-semibold">Kearsipan</span>
+                            <h3 class="buku-title font-bold text-slate-800 mt-2">Manajemen Kearsipan Modern Pekanbaru</h3>
+                            <p class="text-xs text-slate-500 mt-1">Penulis: Tim Dispusip Pekanbaru</p>
+                        </div>
+                        <button onclick="pilihBuku('Manajemen Kearsipan Modern Pekanbaru')" class="mt-4 w-full bg-brand-orange hover:bg-brand-orangehover text-white text-xs font-semibold py-2 rounded-lg transition flex items-center justify-center gap-1">
+                            <i data-lucide="plus" class="w-3.5 h-3.5"></i> Pinjam via Form Nur Hafizah
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Buku 3 -->
+                <div class="buku-card bg-white rounded-xl overflow-hidden border border-slate-200 shadow-sm flex flex-col">
+                    <div class="h-40 bg-brand-lightblue flex items-center justify-center p-4">
+                        <i data-lucide="book-text" class="w-16 h-16 text-brand-blue"></i>
+                    </div>
+                    <div class="p-4 flex-grow flex flex-col justify-between">
+                        <div>
+                            <span class="text-xs bg-blue-100 text-brand-blue px-2 py-0.5 rounded font-semibold">Sastra</span>
+                            <h3 class="buku-title font-bold text-slate-800 mt-2">Kumpulan Gurindam & Sastra Riau</h3>
+                            <p class="text-xs text-slate-500 mt-1">Penulis: Raja Ali Haji</p>
+                        </div>
+                        <button onclick="pilihBuku('Kumpulan Gurindam & Sastra Riau')" class="mt-4 w-full bg-brand-orange hover:bg-brand-orangehover text-white text-xs font-semibold py-2 rounded-lg transition flex items-center justify-center gap-1">
+                            <i data-lucide="plus" class="w-3.5 h-3.5"></i> Pinjam via Form Nur Hafizah
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Buku 4 -->
+                <div class="buku-card bg-white rounded-xl overflow-hidden border border-slate-200 shadow-sm flex flex-col">
+                    <div class="h-40 bg-slate-100 flex items-center justify-center p-4">
+                        <i data-lucide="bookmark" class="w-16 h-16 text-slate-600"></i>
+                    </div>
+                    <div class="p-4 flex-grow flex flex-col justify-between">
+                        <div>
+                            <span class="text-xs bg-slate-200 text-slate-700 px-2 py-0.5 rounded font-semibold">Teknologi</span>
+                            <h3 class="buku-title font-bold text-slate-800 mt-2">Pengembangan Perpustakaan Digital Smart City</h3>
+                            <p class="text-xs text-slate-500 mt-1">Penulis: Dr. Rian Pratama</p>
+                        </div>
+                        <button onclick="pilihBuku('Pengembangan Perpustakaan Digital Smart City')" class="mt-4 w-full bg-brand-orange hover:bg-brand-orangehover text-white text-xs font-semibold py-2 rounded-lg transition flex items-center justify-center gap-1">
+                            <i data-lucide="plus" class="w-3.5 h-3.5"></i> Pinjam via Form Nur Hafizah
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION: LAYANAN -->
+        <section id="page-layanan" class="page-section hidden max-w-7xl mx-auto px-4 py-8">
+            <h2 class="text-2xl font-bold text-brand-darkblue mb-6">Layanan Publik Dispusip</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm">
+                    <div class="flex items-center gap-3 mb-3">
+                        <div class="p-3 bg-brand-lightblue text-brand-blue rounded-lg"><i data-lucide="user-plus" class="w-6 h-6"></i></div>
+                        <h3 class="text-lg font-bold">Pendaftaran Anggota Perpustakaan</h3>
+                    </div>
+                    <p class="text-slate-600 text-sm mb-4">Daftarkan diri Anda untuk mendapatkan Kartu Anggota Perpustakaan Kota Pekanbaru secara mudah.</p>
+                    <button onclick="pilihLayanan('Pendaftaran Anggota Perpustakaan Baru')" class="bg-brand-blue text-white text-sm px-4 py-2 rounded-lg hover:bg-brand-darkblue transition">
+                        Daftar Lewat Form Nur Hafizah
+                    </button>
+                </div>
+
+                <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm">
+                    <div class="flex items-center gap-3 mb-3">
+                        <div class="p-3 bg-orange-100 text-brand-orange rounded-lg"><i data-lucide="monitor" class="w-6 h-6"></i></div>
+                        <h3 class="text-lg font-bold">Perpustakaan Keliling & Ruang Baca</h3>
+                    </div>
+                    <p class="text-slate-600 text-sm mb-4">Permohonan kunjungan armada pustaka keliling ke sekolah, komunitas, atau instansi di Pekanbaru.</p>
+                    <button onclick="pilihLayanan('Permohonan Kunjungan Pustaka Keliling')" class="bg-brand-orange text-white text-sm px-4 py-2 rounded-lg hover:bg-brand-orangehover transition">
+                        Ajukan Kunjungan
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION: KEARSIPAN -->
+        <section id="page-kearsipan" class="page-section hidden max-w-7xl mx-auto px-4 py-8">
+            <div class="bg-white p-8 rounded-2xl border border-slate-200 shadow-sm">
+                <h2 class="text-2xl font-bold text-brand-darkblue mb-4">Bidang Kearsipan Pekanbaru</h2>
+                <p class="text-slate-600 mb-6 leading-relaxed">Bidang Kearsipan Dispusip Kota Pekanbaru bertugas mengelola, memelihara, dan melestarikan dokumen serta arsip bersejarah milik Pemko Pekanbaru dan masyarakat.</p>
+                
+                <div class="bg-brand-lightblue border-l-4 border-brand-blue p-4 rounded-r-lg mb-6">
+                    <h4 class="font-bold text-brand-darkblue text-sm">Konsultasi Kearsipan</h4>
+                    <p class="text-slate-600 text-xs mt-1">Aplikasi dan bimbingan teknis pengelolaan arsip instansi dapat diajukan secara online melalui formulir pelayanan khusus.</p>
+                </div>
+
+                <button onclick="pilihLayanan('Konsultasi & Pengelolaan Kearsipan')" class="bg-brand-blue hover:bg-brand-darkblue text-white px-5 py-2.5 rounded-lg text-sm font-semibold transition flex items-center gap-2">
+                    <i data-lucide="file-text" class="w-4 h-4"></i> Ajukan Konsultasi Kearsipan
+                </button>
+            </div>
+        </section>
+
+        <!-- SECTION: KONTAK -->
+        <section id="page-kontak" class="page-section hidden max-w-7xl mx-auto px-4 py-8">
+            <h2 class="text-2xl font-bold text-brand-darkblue mb-6">Hubungi Kami: </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm space-y-4">
+                    <div class="flex items-start gap-3">
+                        <i data-lucide="map-pin" class="w-5 h-5 text-brand-orange mt-1"></i>
+                        <div>
+                            <h4 class="font-bold text-slate-800">Alamat Kantor</h4>
+                            <p class="text-slate-600 text-sm">Jl. Dr. Sutomo No. 1, Kota Pekanbaru, Riau</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-3">
+                        <i data-lucide="phone" class="w-5 h-5 text-brand-orange mt-1"></i>
+                        <div>
+                            <h4 class="font-bold text-slate-800">Telepon / WhatsApp</h4>
+                            <p class="text-slate-600 text-sm">(085763043540)Fizah</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-3">
+                        <i data-lucide="mail" class="w-5 h-5 text-brand-orange mt-1"></i>
+                        <div>
+                            <h4 class="font-bold text-slate-800">Email Resmi</h4>
+                            <p class="text-slate-600 text-sm">dispusip@pekanbaru.go.id</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-brand-lightblue p-6 rounded-xl border border-blue-200">
+                    <h3 class="font-bold text-brand-darkblue mb-2">Butuh Bantuan Langsung?</h3>
+                    <p class="text-slate-600 text-sm mb-4">Silahkan isi formulir layanan yang ditangani oleh admin **Nur Hafizah** untuk tanggapan lebih cepat.</p>
+                    <button onclick="navigateTo('form')" class="bg-brand-orange text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-brand-orangehover transition">
+                        Menuju Form Nur Hafizah
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION: FORMULIR TERSAMBUNG (NUR HAFIZAH) -->
+        <section id="page-form" class="page-section hidden max-w-3xl mx-auto px-4 py-8">
+            <div class="bg-white rounded-2xl shadow-xl border border-slate-200 overflow-hidden">
+                <div class="bg-gradient-to-r from-brand-darkblue to-brand-blue p-6 text-white relative">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <span class="bg-brand-orange text-white text-xs font-semibold px-2.5 py-1 rounded-full uppercase tracking-wider">Formulir Resmi</span>
+                            <h2 class="text-2xl font-bold mt-2">Layanan Pemohon Dispusip</h2>
+                            <p class="text-slate-200 text-xs mt-1">Sistem Layanan Mandiri Terintegrasi</p>
+                        </div>
+                        <div class="text-right">
+                            <span class="text-xs block text-slate-300">Penanggung Jawab:</span>
+                            <span class="text-sm font-bold text-brand-orange">Nur Hafizah</span>
+                        </div>
+                    </div>
+                </div>
+
+                <form id="dispusip-form" onsubmit="submitForm(event)" class="p-6 space-y-5">
+                    <!-- Dynamic Alert Banner -->
+                    <div id="form-alert" class="hidden bg-orange-50 border-l-4 border-brand-orange p-3 text-sm text-amber-800 rounded">
+                        <span id="alert-text"></span>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium text-slate-700 mb-1">Nama Lengkap Pemohon *</label>
+                        <input type="text" id="input-nama" required placeholder="Masukkan nama lengkap Anda" class="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-brand-blue focus:outline-none text-sm">
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-sm font-medium text-slate-700 mb-1">Nomor WhatsApp / HP *</label>
+                            <input type="tel" id="input-hp" required placeholder="08xxxxxxxxxx" class="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-brand-blue focus:outline-none text-sm">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-slate-700 mb-1">Email *</label>
+                            <input type="email" id="input-email" required placeholder="email@contoh.com" class="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-brand-blue focus:outline-none text-sm">
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium text-slate-700 mb-1">Jenis Layanan / Kebutuhan *</label>
+                        <select id="input-layanan" required class="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-brand-blue focus:outline-none text-sm bg-white">
+                            <option value="">-- Pilih Jenis Layanan --</option>
+                            <option value="Peminjaman Buku Katalog">Peminjaman Buku Katalog</option>
+                            <option value="Pendaftaran Anggota Perpustakaan Baru">Pendaftaran Anggota Baru</option>
+                            <option value="Permohonan Kunjungan Pustaka Keliling">Permohonan Kunjungan Pustaka Keliling</option>
+                            <option value="Konsultasi & Pengelolaan Kearsipan">Konsultasi Kearsipan Daerah</option>
+                            <option value="Layanan Informasi Publik / Lainnya">Lainnya</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium text-slate-700 mb-1">Detail Buku / Keperluan Spesifik *</label>
+                        <textarea id="input-detail" rows="3" required placeholder="Sebutkan judul buku yang ingin dipinjam atau keperluan Anda..." class="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-brand-blue focus:outline-none text-sm"></textarea>
+                    </div>
+
+                    <div class="bg-slate-50 p-3 rounded-lg border border-slate-200 text-xs text-slate-500 flex items-center justify-between">
+                        <span>Petugas Verifikasi: <strong>Nur Hafizah</strong></span>
+                        <span class="text-brand-blue">Dispusip Pekanbaru</span>
+                    </div>
+
+                    <button type="submit" class="w-full bg-brand-orange hover:bg-brand-orangehover text-white font-bold py-3 rounded-xl shadow-lg transition flex items-center justify-center gap-2">
+                        <i data-lucide="send" class="w-4 h-4"></i> Kirim Permohonan
+                    </button>
+                </form>
+
+                <!-- Status Berhasil Dikirimpkan -->
+                <div id="form-success" class="hidden p-8 text-center space-y-4">
+                    <div class="w-16 h-16 bg-green-100 text-green-600 rounded-full flex items-center justify-center mx-auto">
+                        <i data-lucide="check-circle-2" class="w-10 h-10"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-800">Permohonan Berhasil Dikirim!</h3>
+                    <p class="text-slate-600 text-sm max-w-md mx-auto">
+                        Terima kasih <strong id="success-nama" class="text-slate-800"> Pemohon</strong>, permohonan Anda telah dicatat oleh sistem dan sedang diproses oleh admin **Nur Hafizah**.
+                    </p>
+                    <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 text-left text-xs text-slate-600 max-w-md mx-auto space-y-1">
+                        <p><strong>Layanan:</strong> <span id="success-layanan"></span></p>
+                        <p><strong>Detail:</strong> <span id="success-detail"></span></p>
+                    </div>
+                    <div class="pt-4 flex justify-center gap-3">
+                        <button onclick="resetForm()" class="bg-brand-blue text-white px-5 py-2 rounded-lg text-sm font-semibold hover:bg-brand-darkblue transition">
+                            Kirim Permohonan Lain
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer Semantik -->
+    <footer>
+        <p>&copy; 2026 Nur Hafizah | NIM: [2311050092] | Dinas Perpustakaan dan Kearsipan Kota Pekanbaru</p>
+    </footer>
+
+    <!-- Script Utama -->
+    <script src="script.js"></script>
+</body>
+</html>
